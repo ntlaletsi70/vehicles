@@ -14,8 +14,9 @@ class ExampleTest extends TestCase
      */
     public function test_example()
     {
-        $response = $this->get('/');
+        $response = $this->get('/vehicles');
 
         $response->assertStatus(200);
     }
+    # php c:\teamcity-php\phpunit.php -c %teamcity.build.checkoutDir%\unitTests\phpunit.xml
 }
