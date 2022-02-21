@@ -13,7 +13,7 @@ jobs:
      # with credentials stored in the UI
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-         docker run -d --name db company/proprietary-db:1.2.3
+         docker run -d --name vehicles-nginx nginx:1.17-alpine
 
      # build the application image
      - run: docker build -t company/app:$CIRCLE_BRANCH .
