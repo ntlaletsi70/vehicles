@@ -15,20 +15,15 @@ jobs:
      # with credentials stored in the UI
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-         docker run -d --name vehicles-nginx nginx:1.17-alpine
-
-     # pull the database image
-     - run: docker run -d --name vehicles-db mysql:5.7
 
        # pull the database image
-     - run: docker build -t company/app:$CIRCLE_BRANCH .
+     - run: docker build -t ntlaletsi70/automated:$CIRCLE_BRANCH .
      
       # build the application image
-     - run: docker build -t company/app:$CIRCLE_BRANCH .
-
+     - run: docker build -t ntlaletsi70/automated:$CIRCLE_BRANCH .
 
      # deploy the image
-     - run: docker push company/app:$CIRCLE_BRANCH
+     - run: docker push ntlaletsi70:$CIRCLE_BRANCH
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
