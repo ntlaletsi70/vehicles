@@ -11,19 +11,16 @@ jobs:
  build:
    machine: true
    steps:
-  
      - checkout
      # start proprietary DB using private Docker image
      # with credentials stored in the UI
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-
        # build the  image
      - run: docker build -t ntlaletsi70/laravel:$CIRCLE_BRANCH .
-
+       # push the image
      - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
-    
-     # deploy the image
+
 deploy_to_k8s:
     machine: true
     steps:
