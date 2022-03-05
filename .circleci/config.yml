@@ -17,10 +17,10 @@ jobs:
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
        # build the  image
-     - run: docker build -t ntlaletsi70/automated:$CIRCLE_BRANCH .
+     - run: docker build -t ntlaletsi70/laravel:$CIRCLE_BRANCH .
     
      # deploy the image
-     - run: docker push ntlaletsi70/automated:$CIRCLE_BRANCH
+     - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
