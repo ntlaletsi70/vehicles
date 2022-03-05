@@ -8,27 +8,43 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
- build:
+ install:
+   machine: true
+   steps:
+     - kubernetes/install-kubectl
+     - minikube/minikube-install
+ config:
    machine: true
    steps:
      - checkout
-     # start proprietary DB using private Docker image
-     # with credentials stored in the UI
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+ build:
+   machine: true
+   steps:
        # build the  image
      - run: docker build -t ntlaletsi70/laravel:$CIRCLE_BRANCH .
        # push the image
      - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
-     
-     - minikube/minikube-install
-
+ deploy:
+   machine: true
+   steps:
+     #clone the cluster repository
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
-
-     - run: kubectl version
+     #setup necessary cluster configuration
+     - run: sh bootsrap.sh   
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
+  install-workflow:
+    jobs:
+      - install
+  config-workflow:
+    jobs:
+      - config    
   build-workflow:
     jobs:
       - build
+  deploy-workflow:
+    jobs:
+      - deploy       
