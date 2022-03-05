@@ -11,7 +11,7 @@ jobs:
  build:
    machine: true
    steps:
-     - minikube/minikube-install
+  
      - checkout
      # start proprietary DB using private Docker image
      # with credentials stored in the UI
@@ -20,10 +20,17 @@ jobs:
 
        # build the  image
      - run: docker build -t ntlaletsi70/laravel:$CIRCLE_BRANCH .
+
+     - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
     
      # deploy the image
-     - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
+deploy_to_k8s:
+    machine: true
+    steps:
+     - minikube/minikube-install
+
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
+
      - run: kubectl version
 
 # Invoke jobs via workflows
@@ -32,3 +39,4 @@ workflows:
   build-workflow:
     jobs:
       - build
+      - deploy_to_k8s
