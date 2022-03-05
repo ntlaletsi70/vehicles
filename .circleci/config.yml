@@ -14,6 +14,7 @@ jobs:
      - kubernetes/install-kubectl
      - minikube/minikube-install
      - run: minikube version
+     - run: minikube start k8s
      - run: kubectl version
  build:
    machine: true
