@@ -3,7 +3,7 @@
 version: 2.1
 orbs: 
   docker: circleci/docker@2.0.2
-
+  kubernetes: circleci/kubernetes@1.3.0
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -22,6 +22,7 @@ jobs:
      # deploy the image
      - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
+     - run: kubectl set image deployment/php_deployment php=ntlaletsi70/laravel:$CIRCLE_BRANCH
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
