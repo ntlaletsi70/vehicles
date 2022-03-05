@@ -23,7 +23,7 @@ jobs:
      # deploy the image
      - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
-     - run: kubectl set image deployment/php_deployment php=ntlaletsi70/laravel:$CIRCLE_BRANCH
+     - run: kubectl version
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
