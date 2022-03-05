@@ -20,20 +20,15 @@ jobs:
      - run: docker build -t ntlaletsi70/laravel:$CIRCLE_BRANCH .
        # push the image
      - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
-
-deploy:
-    machine: true
-    steps:
+     
      - minikube/minikube-install
 
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
 
      - run: kubectl version
-
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-workflow:
     jobs:
       - build
-      - deploy
