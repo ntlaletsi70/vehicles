@@ -10,6 +10,7 @@ jobs:
  build:
    machine: true
    steps:
+     - kubernetes/install
      - checkout
      # start proprietary DB using private Docker image
      # with credentials stored in the UI
