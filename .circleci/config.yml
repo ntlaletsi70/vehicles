@@ -21,7 +21,7 @@ jobs:
        # push the image
      - run: docker push ntlaletsi70/laravel:$CIRCLE_BRANCH
 
-deploy_to_k8s:
+deploy:
     machine: true
     steps:
      - minikube/minikube-install
@@ -36,4 +36,4 @@ workflows:
   build-workflow:
     jobs:
       - build
-      - deploy_to_k8s
+      - deploy
