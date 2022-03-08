@@ -23,6 +23,7 @@ jobs:
    steps:
      - minikube/install
      - minikube/install-kubectl
+     - minikube/start
     #clone the cluster repository
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
      #setup necessary cluster configuration
