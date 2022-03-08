@@ -26,8 +26,7 @@ jobs:
      - minikube/start
     #clone the cluster repository
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
-     - run: cd k8s && ls -a
-     - run: kubectl apply -f /laravel_vehicles/php_deployment.yaml
+     - run: kubectl apply -f k8s/laravel_vehicles/php_deployment.yaml
      - run: kubectl set image deployment/php php=ntlaletsi70/laravel:$CIRCLE_BRANCH
      #setup necessary cluster configuration
      
