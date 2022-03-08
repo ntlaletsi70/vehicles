@@ -24,6 +24,12 @@ jobs:
      #clone the cluster repository
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
      #setup necessary cluster configuration
+     - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+     - run: test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+     - run: test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+     - run: test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
+     - run: echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
+     
      - run: brew install kind
      - run: kind --version
      - run: kind create cluster --name=k8s
