@@ -23,6 +23,7 @@ jobs:
    steps:
      - minikube/install
      - minikube/install-kubectl
+     - helm/install-helm-client
      - minikube/start
     #clone the cluster repository
      - run: git clone git@bitbucket.org:ntlaletsi/k8s.git
