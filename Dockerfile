@@ -1,4 +1,4 @@
-FROM php:7.4.1-fpm-alpine
+FROM 7.4.32-fpm-alpine3.16
 
 RUN apk update
 RUN apk add --no-cache openssl bash
@@ -26,8 +26,6 @@ RUN addgroup --gid "$GID" "$USER" \
     "$USER"
 
 WORKDIR /var/www
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ENTRYPOINT ["php-fpm"]
 WORKDIR /var/www
