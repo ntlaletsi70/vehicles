@@ -9,7 +9,7 @@ class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
-     *
+     * Extra comment to test webhook
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
