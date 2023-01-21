@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+ 
+$environment = App::environment();
+
 return [
 
     /*
