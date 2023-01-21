@@ -1,10 +1,10 @@
-FROM 7.4.32-fpm-alpine3.16
+FROM php:8.0-fpm-alpine3.16
 
 RUN apk update
 RUN apk add --no-cache openssl bash
 
 RUN apk add --no-cache $PHPIZE_DEPS \
-&& pecl install xdebug-2.9.1 \
+&& pecl install xdebug-3.1.6 \
 && docker-php-ext-enable xdebug
 
 ADD . /var/www
