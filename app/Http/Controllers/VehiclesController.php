@@ -27,6 +27,7 @@ class VehiclesController extends Controller
     public function create()
     {
         //
+        Log::info('Add New Vehicle: ');
         return view('vehicles.create');
     }
 
@@ -39,6 +40,7 @@ class VehiclesController extends Controller
     public function store(Request $request)
     {
         //
+        Log::info('Add New Vehicle Request: ');
         $request->validate([
             'make' => 'required',
             'model' => 'required',
@@ -61,6 +63,7 @@ class VehiclesController extends Controller
     public function show(Vehicle $vehicle)
     {
         //
+        Log::info('Display Vehicle: '.$vehicle);
         return view('vehicles.show',compact('vehicle'));
     }
 
@@ -73,6 +76,7 @@ class VehiclesController extends Controller
     public function edit(Vehicle $vehicle)
     {
         //
+        Log::info('Update Vehicle: '.$vehicles);
         return view('vehicles.edit',compact('vehicle'));
     }
 
@@ -86,6 +90,7 @@ class VehiclesController extends Controller
     public function update(Request $request, Vehicle $vehicle)
     {
         //
+        Log::info('Update Vehicle Request: '.$vehicles);
         $request->validate([
             'make' => 'required',
             'model' => 'required',
@@ -108,6 +113,7 @@ class VehiclesController extends Controller
     public function destroy(Vehicle $vehicle)
     {
         //
+        Log::info('Delete Vehicle: '.$vehicle);
         $vehicle->delete();
 
         return redirect()->route('products.index')
