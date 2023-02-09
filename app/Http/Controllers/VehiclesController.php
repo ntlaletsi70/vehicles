@@ -43,6 +43,9 @@ class VehiclesController extends Controller
             'make' => 'required',
             'model' => 'required',
             'year_of_manufacture' => 'required',
+            'transmission' => 'required',
+            'fuel_type' => 'required',
+            'body_type' => 'required',
             'price' => 'required',
         ]);
 
@@ -93,6 +96,9 @@ class VehiclesController extends Controller
             'make' => 'required',
             'model' => 'required',
             'year_of_manufacture' => 'required',
+            'transmission' => 'required',
+            'fuel_type' => 'required',
+            'body_type' => 'required',
             'price' => 'required',
         ]);
 
