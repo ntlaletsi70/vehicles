@@ -10,6 +10,6 @@ class Vehicle extends Model
     //to generate code comments for documentation
     use HasFactory;
     protected $fillable = [
-        'make', 'model','year_of_manufacture', 'price'
+        'make', 'model','year_of_manufacture', 'price','transmission','fuel_type','body_type'
     ];
 }

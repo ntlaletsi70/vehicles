@@ -18,6 +18,9 @@ class CreateVehiclesTable extends Migration
             $table->string('make');
             $table->string('model');
             $table->bigInteger('year_of_manufacture');
+            $table->string('transmission');
+            $table->string('fuel_type');
+            $table->string('body_type');
             $table->decimal('price');
             $table->timestamps();
         });
