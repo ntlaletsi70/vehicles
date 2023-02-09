@@ -39,8 +39,6 @@ class VehiclesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        
         Log::info('Add New Vehicle Request: ');
         $request->validate([
             'make' => 'required',
