@@ -26,7 +26,6 @@ class VehiclesController extends Controller
      */
     public function create()
     {
-        //
         Log::info('Add New Vehicle: ');
         return view('vehicles.create');
     }
