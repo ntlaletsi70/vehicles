@@ -28,7 +28,7 @@
         @method('PUT')
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Make:</strong>
                     <input type="text" name="make" class="form-control" placeholder="Make">
@@ -44,6 +44,24 @@
                 <div class="form-group">
                     <strong>Year Of Manufacture:</strong>
                     <input type="text" class="form-control" name="year_of_manufacture" placeholder="Year Of Manufacture">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Transmission:</strong>
+                    <input type="text" class="form-control" name="transmission" placeholder="Transmission">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Fuel Type:</strong>
+                    <input type="text" class="form-control" name="fuel_type" placeholder="Fuel Type">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Body Type:</strong>
+                    <input type="text" class="form-control" name="body_type" placeholder="Body Type">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
