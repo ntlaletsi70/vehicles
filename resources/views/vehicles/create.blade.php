@@ -47,6 +47,24 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Transmission:</strong>
+                    <input type="text" class="form-control" name="transmission" placeholder="Transmission">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Fuel Type:</strong>
+                    <input type="text" class="form-control" name="fuel_type" placeholder="Fuel Type">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Body Type:</strong>
+                    <input type="text" class="form-control" name="body_type" placeholder="Body Type">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Price:</strong>
                     <input type="text" name="price" class="form-control"  placeholder="Price">
                 </div>
