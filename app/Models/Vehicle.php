@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vehicle extends Model
 {
     //to generate code comments for documentation
-    //trigger pipeline
+    //trigger pipeline?
     use HasFactory;
     protected $fillable = [
         'make', 'model','year_of_manufacture', 'price','transmission','fuel_type','body_type'
