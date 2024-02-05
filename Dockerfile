@@ -1,20 +1,34 @@
-FROM php:8.3.0-zts-alpine3.17
+FROM php:8.2.10RC1-fpm-bullseye
 
-RUN apk update
-RUN apk add --no-cache openssl bash
+# Arguments defined in docker-compose.yml
+# ARG USER
+# ARG UID
 
-RUN apk add --no-cache --update linux-headers
-RUN docker-php-ext-install pdo pdo_mysql \
-    && docker-php-ext-enable pdo_mysql
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
 
-RUN apk add --no-cache $PHPIZE_DEPS \
-&& pecl install xdebug-3.1.6 \
-&& docker-php-ext-enable xdebug
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ADD . /home/www/vehicles
-RUN chown -R www-data:www-data /home/www/vehicles
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-  # Add a non-root user to prevent files being created with root permissions on host machine.
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# # Create system user to run Composer and Artisan Commands
+# RUN useradd -G www-data,root -u $UID -d /home/$USER $USER
+# RUN mkdir -p /home/$USER/.composer && \
+#     chown -R $USER:$USER /home/$USER
+    
+# Add a non-root user to prevent files being created with root permissions on host machine.
 ENV USER=laravel
 ENV UID 1000
 ENV GID 1000
@@ -27,15 +41,9 @@ RUN addgroup --gid "$GID" "$USER" \
     --ingroup "$USER" \
     --no-create-home \
     --uid "$UID" \
-    "$USER"
+    "$USER"    
 
-WORKDIR /var/www
-
-ENTRYPOINT ["php-fpm"]
+# Set working directory
+COPY --chown=docker:docker . /home/www/vehicles
 WORKDIR /home/www/vehicles
-#RUN php artisan serve
-
-USER $user
-#CMD php artisan serve --host=0.0.0.0 --port=8181
-#EXPOSE 8181
-# CMD ["sh", "-c", "php artisan serve"]
+USER $USER
