@@ -29,6 +29,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 #     chown -R $USER:$USER /home/$USER
 
 # Set working directory
-COPY --chown=docker:docker . /var/www
-WORKDIR /var/www
+COPY --chown=docker:docker . /home/www
+WORKDIR /home/www
 # USER $USER
