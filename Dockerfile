@@ -44,6 +44,6 @@ RUN addgroup --gid "$GID" "$USER" \
     "$USER"    
 
 # Set working directory
-# COPY --chown=docker:docker . /home/www/vehicles
-WORKDIR /home/www/vehicles
+COPY --chown=docker:docker . /var/www
+WORKDIR /var/www
 USER $USER
