@@ -22,7 +22,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-ADD . /home/www/vehicles
+ADD . /var/www
 # # Create system user to run Composer and Artisan Commands
 # RUN useradd -G www-data,root -u $UID -d /home/$USER $USER
 # RUN mkdir -p /home/$USER/.composer && \
