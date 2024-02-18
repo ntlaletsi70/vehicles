@@ -2,32 +2,32 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: app
-  namespace: dev
+  # namespace: dev
 spec:
   template:
     spec:
-      serviceAccountName: dev-account-vehicles
+      # serviceAccountName: dev-account-vehicles
       containers:
         - image: docker.io/ntlaletsi70/vehicles:latest
           imagePullPolicy: Always
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                 - "/bin/sh"
-                 - "-c"
-                 - "cp -r /var/www/. /vehicles 
-                    && cd /var/www
-                    && composer install
-                    && composer fund 
-                    && cp .env.example .env 
-                    && php artisan key:generate
-                    && php artisan route:cache
-                    && php artisan route:clear
-                    && php artisan config:cache
-                    && php artisan config:clear
-                    && php artisan optimize
-                    && chmod -R ugo+rw storage"
+          # lifecycle:
+          #   postStart:
+          #     exec:
+          #       command:
+          #        - "/bin/sh"
+          #        - "-c"
+          #        - "cp -r /var/www/. /vehicles 
+          #           && cd /var/www
+          #           && composer install
+          #           && composer fund 
+          #           && cp .env.example .env 
+          #           && php artisan key:generate
+          #           && php artisan route:cache
+          #           && php artisan route:clear
+          #           && php artisan config:cache
+          #           && php artisan config:clear
+          #           && php artisan optimize
+          #           && chmod -R ugo+rw storage"
           resources:
             requests:
               memory: "300Mi"
@@ -35,16 +35,16 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "500m"
-          volumeMounts:
-            - name: dev-volume
-              mountPath: /vehicles
-      imagePullSecrets:
-        - name: registry-config
-      volumes:
-        - name: dev-volume
-          persistentVolumeClaim:
-            claimName: dev-volume    
-        - name: secret      
-          secret:
-            secretName: registry-config
-            optional: false
+      #     volumeMounts:
+      #       - name: dev-volume
+      #         mountPath: /vehicles
+      # imagePullSecrets:
+      #   - name: registry-config
+      # volumes:
+      #   - name: dev-volume
+      #     persistentVolumeClaim:
+      #       claimName: dev-volume    
+      #   - name: secret      
+      #     secret:
+      #       secretName: registry-config
+      #       optional: false
