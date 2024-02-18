@@ -2,13 +2,13 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: app
-  # namespace: dev
+  namespace: dev
 spec:
   template:
     spec:
       # serviceAccountName: dev-account-vehicles
       containers:
-        - image: docker.io/ntlaletsi70/vehicles:latest
+        - image: docker.io/ntlaletsi70/vehicles:bugfix-redo_dockerfile
           imagePullPolicy: Always
           # lifecycle:
           #   postStart:
