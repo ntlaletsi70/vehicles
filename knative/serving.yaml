@@ -1,12 +1,98 @@
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: app
   namespace: dev
+  labels:
+    app: app
+    tier: backend
+    env: dev
+    version: 0.0.1
+    tag: support_devops_tasks
 spec:
+  selector:
+    matchLabels:
+      app: app
+      env: dev
+      tag: support_devops_tasks
+      tier: backend
+      version: 0.0.1
   template:
+    metadata:
+      labels:
+        app: app
+        env: dev
+        tag: support_devops_tasks
+        tier: backend
+        version: 0.0.1
     spec:
+      enableServiceLinks: false
       serviceAccountName: dev-account-vehicles
+      terminationGracePeriodSeconds: 30
+      #automountServiceAccountToken: true
+      # securityContext:
+      #     runAsUser: 1000
+      #     runAsGroup: 1000
+      #     fsGroup: 1000    
       containers:
-        - image: docker.io/ntlaletsi70/vehicles:bugfix-redo_dockerfile
+        - name: app
+          image: docker.io/ntlaletsi70/vehicles:latest
           imagePullPolicy: Always
+          # env:
+          #   - name: UID
+          #     valueFrom:
+          #       configMapKeyRef:
+          #        name: app-config
+          #        key: UID
+          #   - name: USER
+          #     valueFrom:
+          #       configMapKeyRef:
+          #        name: app-config
+          #        key: USER
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                 - "/bin/sh"
+                 - "-c"
+                 - "cp -r /var/www/. /vehicles 
+                    && cd /var/www
+                    && composer install
+                    && composer fund 
+                    && cp .env.example .env 
+                    && php artisan key:generate
+                    && php artisan route:cache
+                    && php artisan route:clear
+                    && php artisan config:cache
+                    && php artisan config:clear
+                    && php artisan optimize
+                    && chmod -R ugo+rw storage"
+          resources:
+            requests:
+              memory: "300Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: dev-volume
+              mountPath: /vehicles
+            # - name: dev-volume
+            #   mountPath: var/www/.env
+          # securityContext:
+          #   allowPrivilegeEscalation: true
+          #   runAsUser: 1000
+          #   runAsGroup: 1000   
+      imagePullSecrets:
+        - name: registry-config
+      volumes:
+        - name: dev-volume
+          persistentVolumeClaim:
+            claimName: dev-volume
+        # - name: env
+        #   configMap:
+        #     name: app-config       
+        - name: secret      
+          secret:
+            secretName: registry-config
+            optional: false
