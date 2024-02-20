@@ -1,13 +1,33 @@
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: v1
+kind: Pod
 metadata:
-  name: demo
+  name: event-display
+  namespace: vehicles
+  labels:
+    app: el-el-cicd
 spec:
-  template:
-    spec:
-      containers:
-        - image: docker.io/ntlaletsi70/vehicles:bugfix-redo_dockerfile
-          imagePullPolicy: Always
-          # env:
-          #   - name: TARGET
-          #     value: Welcome to the Cloud-Native Summit today
+  hostname: el-el-cicd
+  containers:
+  - image: gcr.io/knative-releases/github.com/knative/eventing-sources/cmd/event_display
+    name: web
+    resources:
+        requests:
+          memory: "300Mi"
+          cpu: "250m"
+        limits:
+          memory: "500Mi"
+          cpu: "500m"
+# ---
+# apiVersion: serving.knative.dev/v1
+# kind: Service
+# metadata:
+#   name: demo
+# spec:
+#   template:
+#     spec:
+#       containers:
+#         - image: docker.io/ntlaletsi70/vehicles:bugfix-redo_dockerfile
+#           imagePullPolicy: Always
+#           # env:
+#           #   - name: TARGET
+#           #     value: Welcome to the Cloud-Native Summit today
